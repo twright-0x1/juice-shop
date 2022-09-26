@@ -4,7 +4,7 @@
         <name>OWASP Juice Shop</name>
         <desc/>
         <inscope>true</inscope>
-        <incregexes>http://test-scan.sec.yale.edu.*</incregexes>
+        <incregexes>http://localhost:3000.*</incregexes>
         <tech>
             <include>Db.MongoDB</include>
             <include>Db.SQLite</include>
@@ -61,9 +61,9 @@
             <pollunits>REQUESTS</pollunits>
             <loggedout>\Q{"user":{}}\E</loggedout>
             <form>
-                <loginurl>http://test-scan.sec.yale.edu/rest/user/login</loginurl>
+                <loginurl>http://localhost:3000/rest/user/login</loginurl>
                 <loginbody>{"email":"{%password%}","password":"admin123"}</loginbody>
-                <loginpageurl>http://test-scan.sec.yale.edu/rest/user/login</loginpageurl>
+                <loginpageurl>http://localhost:3000/rest/user/login</loginpageurl>
             </form>
         </authentication>
         <users>
