@@ -24,16 +24,54 @@ jobs:
     - run: npm install
 
     # Execute Juice Shop on our runner; we can then get ZAP going to
-    # scan the running Juice Shop service
+    # scan the running Juice Shop service.  Note that Juice Shop has
+    # a default user ID and password:
+    #
+    #  User ID :  admin@juice-sh.op
+    #  Password:  admin123
+    #
+    # We'll use these to get an authenticated scan of the service.
     #
     - name: "Execute Juice Shop"
       run: npm start & # Browse to http://localhost:3000
       
-    # Get and run ZAP (unauthenticated, baseline scan)
+    # Get and run ZAP (authenticated, baseline scan).  First,
+    # we present a commented example of an unauthenticated
+    # scan.
     #
-    - name: ZAP Scan
+    # - name: "Unauthenticated ZAP Scan"
+    #   uses: zaproxy/action-baseline@v0.7.0
+    #   with:
+    #     token: ${{ secrets.GITHUB_TOKEN }}
+    #     docker_name: 'owasp/zap2docker-stable'
+    #     target: 'http://localhost:3000'
+    #
+    # Now, on to the authenticated scan...
+
+    # The following would be used if the ZAP context file had a user ID and
+    # password, and the password had been replaced with the term PLACEHOLDER.
+    # This would be done to prevent storing the password in the context file,
+    # in our repository.
+    #
+    # In the case of Juice Shop, it's public knowledge that the default user ID
+    # password are 'admin@juice-sh.op' and 'admin123', so we don't need to worry
+    # about properly handling a password.
+    # 
+    # - name: "Context File Setup"
+    #   env:
+    #     # Set a previously defined secret as an environment variable for this step:
+    #     B64PASSWORD: ${{secrets.B64PASSWORD}}
+    #   # Replace the "PLACEHOLDER" string in the context file with the real base64-encoded password:
+    #   run: |
+    #     sed -ie "s/PLACEHOLDER/${B64PASSWORD}/" $GITHUB_WORKSPACE/ctx_file.context
+    #
+    - name: "Authenticated ZAP Scan"
       uses: zaproxy/action-baseline@v0.7.0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         docker_name: 'owasp/zap2docker-stable'
         target: 'http://localhost:3000'
+        # Additional command line options
+        # -j   runs the AJAX spider
+        # -U   specifies which user to select from the context file
+        cmd_options: -U "admin@juice-sh.op" -n $GITHUB_WORKSPACE/ctx_file.context
