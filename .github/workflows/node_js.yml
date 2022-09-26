@@ -21,6 +21,19 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16
-        cache: 'npm'
     - run: npm install
 
+    # Execute Juice Shop on our runner; we can then get ZAP going to
+    # scan the running Juice Shop service
+    #
+    - name: "Execute Juice Shop"
+      run: npm start & # Browse to http://localhost:3000
+      
+    # Get and run ZAP (unauthenticated, baseline scan)
+    #
+    - name: ZAP Scan
+      uses: zaproxy/action-baseline@v0.7.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        docker_name: 'owasp/zap2docker-stable'
+        target: 'http://localhost:3000'
