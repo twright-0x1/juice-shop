@@ -1,21 +1,20 @@
 /*
- * Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, type OnInit } from '@angular/core'
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { UntypedFormControl, Validators } from '@angular/forms'
 import { ProductReviewService } from '../Services/product-review.service'
 import { MatSnackBar } from '@angular/material/snack-bar'
 
-import { dom, library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowCircleLeft, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
-import { Review } from '../Models/review.model'
+import { type Review } from '../Models/review.model'
 import { SnackBarHelperService } from '../Services/snack-bar-helper.service'
 
 library.add(faPaperPlane, faArrowCircleLeft)
-dom.watch()
 
 @Component({
   selector: 'app-product-review-edit',

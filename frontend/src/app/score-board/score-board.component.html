@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+  ~ Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
   ~ SPDX-License-Identifier: MIT
   -->
 
@@ -107,12 +107,19 @@
 
   </mat-card>
 
+  <div class="score-board-preview-ad">
+    {{ 'SCORE_BOARD_PREVIEW_CATCH_LINE' | translate }}
+    <a mat-button routerLink="/score-board-preview">
+      {{ 'SCORE_BOARD_PREVIEW_ACTION_BUTTON' | translate }}
+    </a>
+  </div>
+
   <mat-card>
     <mat-table *ngIf="challenges" [dataSource]="filterToDataSource(challenges)" [trackBy]="trackById">
 
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef translate>LABEL_NAME</mat-header-cell>
-        <mat-cell *matCellDef="let challenge">
+        <mat-cell *matCellDef="let challenge" [id]="challenge.name">
           {{challenge.name}}
         </mat-cell>
       </ng-container>
@@ -254,4 +261,4 @@
 
 <img src="assets/public/images/padding/1px.png"/>
 
-<ngx-spinner class="overlay-fullscreen" type="timer" size="large"></ngx-spinner>
+<ngx-spinner fullscreen="true" type="timer" size="large"></ngx-spinner>

@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 import models = require('../models/index')
-import { Product } from '../data/types'
-const fuzz = require('fuzzball')
+import { type Product } from '../data/types'
+import fuzz from 'fuzzball'
 const security = require('./insecurity')
 const challengeUtils = require('./challengeUtils')
 const challenges = require('../data/datacache').challenges

@@ -30,8 +30,8 @@ export class CodeFixesService {
 
   check (key: string, selectedFix: number): any {
     return this.http.post(this.host, {
-      key: key,
-      selectedFix: selectedFix
+      key,
+      selectedFix
     }).pipe(map((response: result) => response), catchError((error: any) => { throw error }))
   }
 }

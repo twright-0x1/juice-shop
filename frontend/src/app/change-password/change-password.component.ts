@@ -1,19 +1,18 @@
 /*
- * Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 
-import { AbstractControl, UntypedFormControl, Validators } from '@angular/forms'
+import { type AbstractControl, UntypedFormControl, Validators } from '@angular/forms'
 import { UserService } from '../Services/user.service'
 import { Component } from '@angular/core'
-import { dom, library } from '@fortawesome/fontawesome-svg-core'
+import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-regular-svg-icons'
 import { FormSubmitService } from '../Services/form-submit.service'
 import { TranslateService } from '@ngx-translate/core'
 
 library.add(faSave, faEdit)
-dom.watch()
 
 @Component({
   selector: 'app-change-password',
@@ -30,7 +29,7 @@ export class ChangePasswordComponent {
   constructor (private readonly userService: UserService, private readonly formSubmitService: FormSubmitService, private readonly translate: TranslateService) { }
 
   ngOnInit () {
-    this.formSubmitService.attachEnterKeyHandler('password-form', 'changeButton', () => this.changePassword())
+    this.formSubmitService.attachEnterKeyHandler('password-form', 'changeButton', () => { this.changePassword() })
   }
 
   changePassword () {

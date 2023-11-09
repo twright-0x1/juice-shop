@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 
-import { Request, Response, NextFunction } from 'express'
+import { type Request, type Response, type NextFunction } from 'express'
 import { MemoryModel } from '../models/memory'
-import { ProductModel } from '../models/product'
+import { type ProductModel } from '../models/product'
 
 import challengeUtils = require('../lib/challengeUtils')
 const security = require('../lib/insecurity')
@@ -109,7 +109,7 @@ module.exports = function dataExport () {
         next(new Error(`Error retrieving orders for ${updatedEmail}`))
       })
     } else {
-      next(new Error('Blocked illegal activity by ' + req.connection.remoteAddress))
+      next(new Error('Blocked illegal activity by ' + req.socket.remoteAddress))
     }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2022 Bjoern Kimminich & the OWASP Juice Shop contributors.
+ * Copyright (c) 2014-2023 Bjoern Kimminich & the OWASP Juice Shop contributors.
  * SPDX-License-Identifier: MIT
  */
 
@@ -9,11 +9,11 @@ import challengeUtils = require('../lib/challengeUtils')
 
 import {
   Model,
-  InferAttributes,
-  InferCreationAttributes,
+  type InferAttributes,
+  type InferCreationAttributes,
   DataTypes,
-  CreationOptional,
-  Sequelize
+  type CreationOptional,
+  type Sequelize
 } from 'sequelize'
 const security = require('../lib/insecurity')
 const challenges = require('../data/datacache').challenges
